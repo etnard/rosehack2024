@@ -1,6 +1,11 @@
 #include <iostream>
+#include "onetonumber.cpp"
+#include "whackamole.cpp"
+#include "cardgame.cpp"
+
+using namespace std;
 
 int main(){
-    printf("hello world!");
+    
     return 0;
 }
