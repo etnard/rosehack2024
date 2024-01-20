@@ -17,23 +17,36 @@ bool whackamole(){
 
     //PRINT GRID
     for (int i = 0; i < input; i++){
-        for (int i = 0; i < input; i++){
+        for (int j = 0; j < input; j++){
             cout << "O ";
         }
         cout << endl;
     }
 
-    int coordinateX = 1 + (rand() % input);
-    int coordinateY = 1 + (rand() % input);
+    int coordinateX = 1 + (rand() % input);;
+    int coordinateY = 1 + (rand() % input);;
 
-    cout << endl << "Guess a point in the grid by putting in two integers" << endl;
+    cout << endl << "Guess coordinates on the grid by putting in two integers" << endl;
     cin >> xCord;
     cin >> yCord;
 
     if ((xCord == coordinateX) && (yCord == coordinateY)){
-        cout << "Correct!";
+        cout << endl << "Correct!" << endl;
+        
+        for (int i = 0; i < input; i++){
+            for (int j = 2; j < input+2; j++){
+                if (i == xCord && j == yCord){
+                    cout << "X ";
+                }
+                else{
+                    cout << "O ";
+                }
+            }
+            cout << endl;
+        }
+        
         return true;
+
     }
     return false;
-
 }
