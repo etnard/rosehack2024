@@ -14,8 +14,8 @@ bool whackamole(int input){
         cout << endl;
     }
 
-    int coordinateX = 1 + (rand() % input);;
-    int coordinateY = 1 + (rand() % input);;
+    int coordinateX = (rand() % input) + 1;
+    int coordinateY = (rand() % input) + 1;
 
     cout << endl << "Guess coordinates on the grid by putting in two integers" << endl;
     cin >> xCord;
@@ -23,11 +23,8 @@ bool whackamole(int input){
 
     if ((xCord == coordinateX) && (yCord == coordinateY)){
         for (int i = 0; i < input; i++){
-            for (int j = 2; j < input+2; j++){
+            for (int j = 0; j < input; j++){
                 if (j == xCord && i == yCord){
-                    cout << "X ";
-                }
-                else if (j == xCord && i == yCord){
                     cout << "X ";
                 }
             }
@@ -44,7 +41,7 @@ bool whackamole(int input){
                     cout << "X ";
                 }
                 else if (j == coordinateX && i == coordinateY){
-                    cout << "X ";
+                    cout << "U ";
                 }
                 else {
                     cout << "O ";
