@@ -7,7 +7,11 @@
 
 using namespace std;
 
-int balance = 100;
+double balance = 100;
+
+void printBalance() {
+    cout << "Your current balance is: $" << balance << "!" << endl;
+}
 
 void goodbyeMessage() {
     // get current hour
@@ -36,6 +40,8 @@ int gameTime() {
     printf("-----------------------------------------\n\n");
 
     int gamePlay = 0;
+    int difficulty = 0;
+    double betAmount = 0;
 
     while(1) {
         printf("Choose your game:\n");
@@ -47,15 +53,88 @@ int gameTime() {
         }
     }
 
-    if(gamePlay == 1) {
-        // call onetonumber
+    if(gamePlay != 0) {
+        while(1) {
+            printf("Choose your difficulty:\n");
+            printf("1) Easy.\n");
+            printf("2) Medium.\n");
+            printf("3) Hard.\n");
+            cin >> difficulty;
+            if((3 < difficulty) || (difficulty < 1)) {
+                printf("Error: invalid input.\n");
+            } else {
+                break;
+            }
+        }
 
-    } else if(gamePlay == 2) {
-        // call whackamole
+        while(1) {
+            printf("Choose your bet amount:\n");
+            cin >> betAmount;
+            if((balance < difficulty) || (difficulty < 0)) {
+                printf("Error: invalid input.\n");
+            } else {
+                break;
+            }
+        }
 
-    } else if(gamePlay == 3) {
-        // call deckocards
+        balance = balance - betAmount;
 
+        if(gamePlay == 1) {
+            printf("Guess a number:\n");
+
+            // call onetonumber
+            if(onetonumber(difficulty)) {
+                printf("Congradulations! ^_^");
+
+                if(difficulty == 1) {
+                    betAmount = betAmount * 1.25;
+                } else if(difficulty == 2) {
+                    betAmount = betAmount * 2.5;
+                } else {
+                    betAmount = betAmount * 5;
+                }
+                balance += betAmount;
+
+                printBalance();
+            } else {
+                printf("You Lose! :(\n");
+            }
+        } else if(gamePlay == 2) {
+            cout << "Grids to play with:" << endl;
+            cout << "Easy: 3x3 (wins 1.25x the money)" << endl;
+            cout << "Medium: 6x6 (wins 2.5x the money)" << endl;
+            cout << "Hard: 18x18 (wins 5x the money)" << endl << endl; 
+
+            // call whackamole
+            if(whackamole(difficulty)) {
+                printf("Congradulations! ^_^");
+
+                if(difficulty == 1) {
+                    betAmount = betAmount * 1.25;
+                } else if(difficulty == 2) {
+                    betAmount = betAmount * 2.5;
+                } else {
+                    betAmount = betAmount * 5;
+                }
+                balance += betAmount;
+
+                printBalance();
+            } else {
+                printf("You Lose! :(\n");
+            }
+        } else if(gamePlay == 3) {
+            // call deckocards
+            if(cardgame()) {
+                printf("Congradulations! ^_^");
+
+                betAmount = betAmount * 5;
+                balance += betAmount;
+
+                printBalance();
+            } else {
+                printf("You Lose! :(\n");
+            }
+        }
     }
 
     return 0;
@@ -74,7 +153,7 @@ int main(){
 
     // user input and error check
     while(1) {
-        printf("Choose your move:\n");
+        printf("Choose an option:\n");
         cin >> userInput;
 
         if((2 < userInput) || (userInput < 0)) {
@@ -83,7 +162,7 @@ int main(){
 
         // print balance
         if(userInput == 1) {
-            cout << "Your current balance is: $" << balance << "!" << endl;
+            printBalance();
         }
 
         // play game
@@ -92,7 +171,7 @@ int main(){
         }
     
         // exit
-        if(userInput == 0) {
+        if(userInput == 0 || balance == 0) {
             goodbyeMessage();
             break;
         }
