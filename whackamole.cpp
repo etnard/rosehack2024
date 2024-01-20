@@ -24,11 +24,11 @@ bool whackamole(int input){
     if ((xCord == coordinateX) && (yCord == coordinateY)){
         for (int i = 0; i < input; i++){
             for (int j = 2; j < input+2; j++){
-                if (i == xCord && j == yCord){
+                if (j == xCord && i == yCord){
                     cout << "X ";
                 }
-                else{
-                    cout << "O ";
+                else if (j == xCord && i == yCord){
+                    cout << "X ";
                 }
             }
             cout << endl;
@@ -40,7 +40,15 @@ bool whackamole(int input){
     
     for (int i = 0; i < input; i++){
         for (int j = 0; j < input; j++){
-            cout << "O ";
+            if (j == xCord && i == yCord){
+                    cout << "X ";
+                }
+                else if (j == coordinateX && i == coordinateY){
+                    cout << "X ";
+                }
+                else {
+                    cout << "O ";
+                }
         }
         cout << endl;
     }
